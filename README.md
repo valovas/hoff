@@ -63,52 +63,6 @@
 ## Вывод товара в цикле
 
 ### Товарная 1 в ряд
-![image](/images/5.png)
-```html
-<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-  <tr>
-    <td align="center" valign="top" style="padding:0;">
-      <table align="center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-        <tr>
-          <td width="580" align="center" valign="top" style="padding:0;font-size:0;">
-            <!--[if mso]><table align="center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr><![endif]-->{% for product in products %}{% set productMin = productsMin[products.index(product)]%}{% if customer.region_price in productMin.available_region %}{% set oldPrice=productMin['price'~cp~'old']|int %}{% set newPrice=productMin['price'~cp]|int %}{% set discount=((1-newPrice/oldPrice)*100)|round(0,'floor')|int if oldPrice !=0 %}{% set count = count + 1 %}{%- if count < 9 -%}<!--[if mso]><td width="290" align="center" valign="top"><![endif]-->
-            <div style="display:inline-block;vertical-align:top;max-width:290px;">
-              <table align="center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                <tr>
-                  <td width="290" align="center" valign="top" style="padding:0 0 40px 0;">
-                    <div style="padding:0 10px 0 10px;">
-                      <table align="center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                        <tr>
-                          <td width="270" align="center" valign="top" style="padding:0 0 17px 0;"><a href="{{ product.url }}&{{utm}}" target="_blank" style="border:none;text-decoration:none;"><img src="{{ product.image }}" width="270" border="0" alt="{{ product.title }}" style="display:block;font-size:12px;width:100%;max-width:270px;" /></a></td>
-                        </tr>
-                        <tr>
-                          <td width="270" align="left" valign="top" style="padding:0 0 5px 0;font-family:'Arial Black',Arial,Helvetica,Roboto,sans-serif;text-align:left;font-size:13px;font-weight:bold;color:#000000;line-height:18px;">
-                            <a href="{{ product.url }}&{{utm}}" style="text-decoration:none;color:#000000;font-weight:bold;border:none;" target="_blank">{{ product.title | truncate(60) }}</a>
-                          </td>
-                        </tr>
-                        {% if oldPrice != 0 %}{% if oldPrice > newPrice %}<tr>
-                          <td width="270" align="left" valign="middle" style="padding:0;font-family:'Arial Black',Arial,Helvetica,Roboto,sans-serif;text-align:left;font-size:28px;font-weight:bold;color:#000000;line-height:34px;"><a href="{{ product.url }}&{{utm}}" style="text-decoration:none;color:#000000;font-weight:bold;border:none;" target="_blank">{{format_price(newPrice)}}&nbsp;р &nbsp;<span style="display:inline-block;padding:0 2px 0 0;font-size:17px;background-color:#ffdc00;border-radius:17px;">&nbsp;&ndash;{{discount}}%&nbsp;</span></a></td>
-                        </tr>
-                        <tr>
-                          <td width="270" align="left" valign="middle" style="padding:0 0 10px 0;font-family:Arial,Helvetica,Roboto,sans-serif;text-align:left;font-size:13px;font-weight:normal;color:#000000;line-height:16px;text-decoration:line-through;"><a href="{{ product.url }}&{{utm}}" style="text-decoration:none;color:#000000;border:none;" target="_blank">{{format_price(oldPrice)}}&nbsp;р</a></td>
-                        </tr>{%endif%}{%else%}<tr>
-                          <td width="270" align="left" valign="middle" style="padding:0 0 10px 0;font-family:'Arial Black',Arial,Helvetica,Roboto,sans-serif;text-align:left;font-size:28px;font-weight:bold;color:#000000;line-height:34px;"><a href="{{ product.url }}&{{utm}}" style="text-decoration:none;color:#000000;font-weight:bold;border:none;" target="_blank">{{format_price(newPrice)}}&nbsp;р</a></td>
-                        </tr>{%endif%}
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div><!--[if mso]></td><![endif]-->{% if (count is even) and (count != 8) %}<!--[if mso]></tr><tr><![endif]-->{%endif%}{%endif%}{%endif%}{%endfor%}<!--[if mso]></tr></table><![endif]-->
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-```
-
-### Товарная 2 в ряд
 ![image](/images/4.png)
 ```html
 {% for item in goods %}{% set product = catalogs.Items.item_by_id(item) %}{% set productMin = catalogs.ItemsMin.item_by_id(item) %}{% if customer.region_price in productMin.available_region %}{% set oldPrice=productMin['price'~cp~'old']|int %}{% set newPrice=productMin['price'~cp]|int %}{% set discount=((1-newPrice/oldPrice)*100)|round(0,'floor')|int if oldPrice !=0 %}{% set count = count + 1 %}{%- if count < 7 -%}<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
@@ -173,6 +127,52 @@
     </td>
   </tr>
 </table>{%endif%}{%endif%}{%endfor%}
+```
+
+### Товарная 2 в ряд
+![image](/images/5.png)
+```html
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+  <tr>
+    <td align="center" valign="top" style="padding:0;">
+      <table align="center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+        <tr>
+          <td width="580" align="center" valign="top" style="padding:0;font-size:0;">
+            <!--[if mso]><table align="center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr><![endif]-->{% for product in products %}{% set productMin = productsMin[products.index(product)]%}{% if customer.region_price in productMin.available_region %}{% set oldPrice=productMin['price'~cp~'old']|int %}{% set newPrice=productMin['price'~cp]|int %}{% set discount=((1-newPrice/oldPrice)*100)|round(0,'floor')|int if oldPrice !=0 %}{% set count = count + 1 %}{%- if count < 9 -%}<!--[if mso]><td width="290" align="center" valign="top"><![endif]-->
+            <div style="display:inline-block;vertical-align:top;max-width:290px;">
+              <table align="center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+                <tr>
+                  <td width="290" align="center" valign="top" style="padding:0 0 40px 0;">
+                    <div style="padding:0 10px 0 10px;">
+                      <table align="center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+                        <tr>
+                          <td width="270" align="center" valign="top" style="padding:0 0 17px 0;"><a href="{{ product.url }}&{{utm}}" target="_blank" style="border:none;text-decoration:none;"><img src="{{ product.image }}" width="270" border="0" alt="{{ product.title }}" style="display:block;font-size:12px;width:100%;max-width:270px;" /></a></td>
+                        </tr>
+                        <tr>
+                          <td width="270" align="left" valign="top" style="padding:0 0 5px 0;font-family:'Arial Black',Arial,Helvetica,Roboto,sans-serif;text-align:left;font-size:13px;font-weight:bold;color:#000000;line-height:18px;">
+                            <a href="{{ product.url }}&{{utm}}" style="text-decoration:none;color:#000000;font-weight:bold;border:none;" target="_blank">{{ product.title | truncate(60) }}</a>
+                          </td>
+                        </tr>
+                        {% if oldPrice != 0 %}{% if oldPrice > newPrice %}<tr>
+                          <td width="270" align="left" valign="middle" style="padding:0;font-family:'Arial Black',Arial,Helvetica,Roboto,sans-serif;text-align:left;font-size:28px;font-weight:bold;color:#000000;line-height:34px;"><a href="{{ product.url }}&{{utm}}" style="text-decoration:none;color:#000000;font-weight:bold;border:none;" target="_blank">{{format_price(newPrice)}}&nbsp;р &nbsp;<span style="display:inline-block;padding:0 2px 0 0;font-size:17px;background-color:#ffdc00;border-radius:17px;">&nbsp;&ndash;{{discount}}%&nbsp;</span></a></td>
+                        </tr>
+                        <tr>
+                          <td width="270" align="left" valign="middle" style="padding:0 0 10px 0;font-family:Arial,Helvetica,Roboto,sans-serif;text-align:left;font-size:13px;font-weight:normal;color:#000000;line-height:16px;text-decoration:line-through;"><a href="{{ product.url }}&{{utm}}" style="text-decoration:none;color:#000000;border:none;" target="_blank">{{format_price(oldPrice)}}&nbsp;р</a></td>
+                        </tr>{%endif%}{%else%}<tr>
+                          <td width="270" align="left" valign="middle" style="padding:0 0 10px 0;font-family:'Arial Black',Arial,Helvetica,Roboto,sans-serif;text-align:left;font-size:28px;font-weight:bold;color:#000000;line-height:34px;"><a href="{{ product.url }}&{{utm}}" style="text-decoration:none;color:#000000;font-weight:bold;border:none;" target="_blank">{{format_price(newPrice)}}&nbsp;р</a></td>
+                        </tr>{%endif%}
+                      </table>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div><!--[if mso]></td><![endif]-->{% if (count is even) and (count != 8) %}<!--[if mso]></tr><tr><![endif]-->{%endif%}{%endif%}{%endif%}{%endfor%}<!--[if mso]></tr></table><![endif]-->
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
 ```
 
 * `{% if (count is even) and (count != 8) %}<!--[if mso]></tr><tr><![endif]-->{%endif%}`  
