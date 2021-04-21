@@ -63,7 +63,7 @@
 ## Вывод товара в цикле
 
 ### Товарная 1 в ряд
-![image](/images/4.png)
+![image](/images/5.png)
 ```html
 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
   <tr>
@@ -109,7 +109,7 @@
 ```
 
 ### Товарная 2 в ряд
-![image](/images/5.png)
+![image](/images/4.png)
 ```html
 {% for item in goods %}{% set product = catalogs.Items.item_by_id(item) %}{% set productMin = catalogs.ItemsMin.item_by_id(item) %}{% if customer.region_price in productMin.available_region %}{% set oldPrice=productMin['price'~cp~'old']|int %}{% set newPrice=productMin['price'~cp]|int %}{% set discount=((1-newPrice/oldPrice)*100)|round(0,'floor')|int if oldPrice !=0 %}{% set count = count + 1 %}{%- if count < 7 -%}<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
   <tr>
